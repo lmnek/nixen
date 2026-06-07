@@ -28,6 +28,9 @@ inputs,
 
     # up to date kernel (need for my amazing panther lake cpu/igpu)
     boot.kernelPackages = pkgs.linuxPackages_latest;
+    # disable Panel Self Refresh -> avoid screen glitches?
+    # WARNING: shorter battery time! - also try if only =2 or =3 works
+    boot.kernelParams = [ "xe.enable_psr=0" ];
 
     hardware.bluetooth.enable = true;
 
