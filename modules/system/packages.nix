@@ -20,5 +20,10 @@
         just # utils
     ];
 
+    programs.localsend = {
+        enable = true;
+        openFirewall = true;
+    };
+
     # services.mako.enable = true; # notifications - doesn't need because of noctalia?
 }
