@@ -37,7 +37,9 @@ inputs,
                 fuzzel # launcher
                 swaybg # wallpaper
                 libnotify # notify-send
-                cliphist wl-clipboard wl-clip-persist
+                cliphist wl-clipboard wl-clip-persist # clipboard
+                ripdrag
+                wtype # text injection backend for handy
 
                 # Apps
                 obsidian

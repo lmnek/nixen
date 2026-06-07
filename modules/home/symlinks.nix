@@ -7,17 +7,19 @@
         let
             dotfiles = "${config.home.homeDirectory}/repos/dotfiles/tilde/.config";
         in
-            lib.mapAttrs
-        (name: path: {
+            lib.genAttrs
+        [
+            "ghostty"
+            "fish"
+            "starship.toml"
+            "yazi"
+            "nvim"
+            "zellij"
+            "niri"
+            "noctalia"
+        ]
+        (path: {
             source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
             recursive = true;
-        })
-        {
-            ghostty = "ghostty";
-            fish = "fish";
-            starship = "starship.toml";
-            yazi = "yazi";
-            nvim = "nvim";
-            zellij = "zellij";
-        };
+        });
 }

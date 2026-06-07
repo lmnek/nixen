@@ -30,7 +30,7 @@ inputs,
     boot.kernelPackages = pkgs.linuxPackages_latest;
     # disable Panel Self Refresh -> avoid screen glitches?
     # WARNING: shorter battery time! - also try if only =2 or =3 works
-    boot.kernelParams = [ "xe.enable_psr=0" ];
+    boot.kernelParams = [ "xe.enable_psr=0" "xe.enable_psr2_sel_fetch=0" ];
 
     hardware.bluetooth.enable = true;
 
