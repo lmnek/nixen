@@ -21,6 +21,15 @@ inputs,
     # home-manager NixOS module (from users.users.lmnk in the system config)
     home = {
         stateVersion = "26.05";
+
+        # User-level env vars, set once at login
+        sessionVariables = {
+            TERMINAL = "ghostty";
+            PAGER = "less";
+            LESS = "-R"; # keep colors when paging
+            # EDITOR already set by neovim option
+        };
+
         packages =
             (with pkgs; [
                 # Desktop
@@ -28,10 +37,16 @@ inputs,
                 fuzzel # launcher
                 swaybg # wallpaper
                 libnotify # notify-send
+                cliphist wl-clipboard wl-clip-persist
 
                 # Apps
-                tidal-hifi
-                # beeper
+                obsidian
+                beeper
+                morgen
+                handy
+                nsxiv
+                # todoist # -> need appimage?
+                # gwenview
 
                 # CLI tools
                 yazi
@@ -63,6 +78,7 @@ inputs,
                     [
                     inputs.noctalia.packages.${sys}.default # desktop shell
                     inputs.zen-browser.packages.${sys}.default # browser
+                    inputs.sone.packages.${sys}.default # native TIDAL client
 
                     # llm tools
                     inputs.llm-agents.packages.${sys}.claude-code

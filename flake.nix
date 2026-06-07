@@ -23,6 +23,8 @@
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
+        sone.url = "github:lullabyX/sone"; # native TIDAL client
+
         llm-agents.url = "github:numtide/llm-agents.nix";
 
         nix-index-database = {
