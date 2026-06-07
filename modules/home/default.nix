@@ -37,6 +37,7 @@ inputs,
                 yazi
                 lazygit
                 starship
+                manix # fast offline search of nixpkgs/NixOS option docs
 
                 # utils
                 ripgrep
@@ -68,6 +69,13 @@ inputs,
                     inputs.llm-agents.packages.${sys}.codex
                 ]
             );
+    };
+
+    # Auto-loads per-project dev shells on `cd` + nix-direnv cachin
+    # Drop a `.envrc` with `use flake` in a project dir and run `direnv allow`
+    programs.direnv = {
+        enable = true;
+        nix-direnv.enable = true;
     };
 
     programs.zellij.enable = true;

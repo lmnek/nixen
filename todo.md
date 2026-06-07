@@ -4,8 +4,7 @@ Migration:
 - functional neovim - LSPs
 - ghostty terminal
 - clipboard manager!!! (and rofi in general)
+- go through apps from arch
 
 improvements:
-- claude recommendations
-- nix caches
-- Formatter on save for nix (nixfmt-rfc-style + conform.nvim, snippet from my last message)
+- Formatter on save for nix (nixfmt-rfc-style + conform.nvim)
