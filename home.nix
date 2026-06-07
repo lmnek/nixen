@@ -6,12 +6,15 @@
         homeDirectory = "/home/lmnk";
         stateVersion = "26.05";
         packages = with pkgs; [
-            # tools
+            # Apps
+            # beeper
+            ghostty
+
+            # CLI tools
             yazi
             lazygit
             fish
             starship
-            zellij
 
             # utils
             ripgrep
@@ -28,15 +31,17 @@
         ];
     };
 
+    programs.zellij.enable = true;
+
     programs.neovim = {
         enable = true;
         defaultEditor = true;
         sideloadInitLua = true;
-        # PATH additions visible ONLY inside nvim (via wrapper), keeps your env clean:
+        # PATH additions visible ONLY inside nvim (via wrapper), keeps env clean:
         extraPackages = with pkgs; [
             # build toolchain for lazy.nvim build steps & treesitter parser compilation
             gcc gnumake
-            # treesitter main branch hard-requires the CLI (see below)
+            # treesitter main branch hard-requires the CLI
             tree-sitter
             # things plugins shell out to
             ripgrep fd git curl unzip
@@ -65,8 +70,7 @@
     };
 
 
-    # Symlink the entire .config directory
-    # home.file.".config".source = ./dotfiles/.config;
+    # Symlink farm
     xdg.configFile =
         let
             dotfiles = "${config.home.homeDirectory}/repos/dotfiles/tilde/.config";
@@ -75,25 +79,11 @@
                 source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
                 recursive = true;
             }) {
+            ghostty = "ghostty";
             fish = "fish";
             starship = "starship.toml";
             yazi = "yazi";
             nvim = "nvim";
             zellij = "zellij";
         };
-    # xdg.configFile = {
-    #     nvim = {
-    #         source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/repos/dotfiles/tilde/.config/nvim";
-    #         recursive = true;
-    #     };
-    #     zellij = {
-    #         source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/repos/dotfiles/tilde/.config/zellij";
-    #         recursive = true;
-    #     };
-    #     fish = {
-    #         source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/repos/dotfiles/tilde/.config/fish";
-    #         recursive = true;
-    #     };
-    #     starship.source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/repos/dotfiles/tilde/.config/starship.toml";
-    # };
 }
