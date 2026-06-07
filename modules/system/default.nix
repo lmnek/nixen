@@ -16,24 +16,10 @@ inputs,
         ./gaming.nix
         ./kanata.nix
         ./networking.nix
+        ./nix.nix
         ./packages.nix
         ./services.nix
     ];
-
-    # Nix-related
-    nix.settings.experimental-features = [
-        "nix-command"
-        "flakes"
-    ];
-    nixpkgs.config.allowUnfree = true;
-
-    # Garbage collection + automatic store deduplication
-    nix.gc = {
-        automatic = true;
-        dates = "weekly";
-        options = "--delete-older-than 30d";
-    };
-    nix.settings.auto-optimise-store = true;
 
     # systemd-boot EFI boot loader.
     boot.loader.systemd-boot.enable = true;
