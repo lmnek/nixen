@@ -15,8 +15,11 @@
             "yazi"
             "nvim"
             "zellij"
+            "lazygit"
             "niri"
             "noctalia"
+            "claude"
+            "fastfetch"
         ]
         (path: {
             source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";

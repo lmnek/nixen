@@ -10,10 +10,12 @@ inputs,
     imports = [
         ./neovim.nix
         ./symlinks.nix
+        ./slack.nix
+        ./voxtype.nix
         inputs.nix-index-database.homeModules.default
     ];
 
-    # `,` runs any nixpkgs program without installing inherit
+    # `,` runs any nixpkgs program without installing 🌟
     # -> uses a prebuilt nix-index database -> no slow local index build
     programs.nix-index-database.comma.enable = true;
 
@@ -39,7 +41,8 @@ inputs,
                 libnotify # notify-send
                 cliphist wl-clipboard wl-clip-persist # clipboard
                 ripdrag
-                wtype # text injection backend for handy
+                wtype # text injection backend for handy/voxtype
+                flameshot grim # screenshots
 
                 # Apps
                 obsidian
@@ -47,14 +50,21 @@ inputs,
                 morgen
                 handy
                 nsxiv
+                teams-for-linux
+                mpv
+                obs-studio
+                vesktop # discord
                 # todoist # -> need appimage?
                 # gwenview
 
                 # CLI tools
                 yazi
                 lazygit
+                delta
+                lazydocker
                 starship
                 manix # fast offline search of nixpkgs/NixOS option docs
+                libqalculate # qalc
 
                 # utils
                 ripgrep
@@ -71,6 +81,12 @@ inputs,
                 p7zip
                 poppler
                 imagemagick # yazi previewers/openers
+
+                # dev
+                nodejs # node, npm, npx
+                yarn
+                python3 uv
+                dbeaver-bin
             ])
             ++ (
                 # Packages that come from flake inputs
@@ -79,8 +95,7 @@ inputs,
                 in
                     [
                     inputs.noctalia.packages.${sys}.default # desktop shell
-                    inputs.zen-browser.packages.${sys}.default # browser
-                    inputs.sone.packages.${sys}.default # native TIDAL client
+                    # inputs.sone.packages.${sys}.default # native TIDAL client
 
                     # llm tools
                     inputs.llm-agents.packages.${sys}.claude-code
@@ -95,6 +110,11 @@ inputs,
         enable = true;
         nix-direnv.enable = true;
     };
+
+    # Polyglot runtime/tool manager (the workplace standard). Installs prebuilt
+    # binaries for node/python/uv/… which run thanks to nix-ld + envfs (see
+    # modules/system/dev.nix). Shell integration adds its shims to PATH.
+    programs.mise.enable = true;
 
     programs.zellij.enable = true;
 
