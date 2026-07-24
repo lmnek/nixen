@@ -41,14 +41,13 @@ inputs,
                 libnotify # notify-send
                 cliphist wl-clipboard wl-clip-persist # clipboard
                 ripdrag
-                wtype # text injection backend for handy/voxtype
+                wtype # text injection backend for voxtype
                 flameshot grim # screenshots
 
                 # Apps
                 obsidian
                 beeper
                 morgen
-                handy
                 nsxiv
                 teams-for-linux
                 mpv
