@@ -36,6 +36,11 @@ up: update switch
 check:
     nix flake check
 
+# Lint Nix files: statix (anti-patterns) + deadnix (dead code)
+lint:
+    -nix run nixpkgs#statix -- check .
+    nix run nixpkgs#deadnix -- .
+
 # Garbage-collect: delete generations older than 7 days, then collect
 gc:
     sudo nix-collect-garbage --delete-older-than 7d
