@@ -13,12 +13,16 @@ inputs,
 {
     imports = [
         ./desktop.nix
+        ./dev.nix
         ./gaming.nix
+        ./goodaccess.nix
         ./kanata.nix
+        ./kbd-backlight.nix
         ./networking.nix
         ./nix.nix
         ./packages.nix
         ./services.nix
+        ./virtualisation.nix
     ];
 
     # systemd-boot EFI boot loader.
@@ -28,9 +32,6 @@ inputs,
 
     # up to date kernel (need for my amazing panther lake cpu/igpu)
     boot.kernelPackages = pkgs.linuxPackages_latest;
-    # disable Panel Self Refresh -> avoid screen glitches?
-    # WARNING: shorter battery time! - also try if only =2 or =3 works
-    boot.kernelParams = [ "xe.enable_psr=0" "xe.enable_psr2_sel_fetch=0" ];
 
     hardware.bluetooth.enable = true;
 
@@ -86,6 +87,14 @@ inputs,
     programs.gnupg.agent = {
         enable = true;
         enableSSHSupport = true;
+    };
+
+    services.syncthing = {
+        enable = true;
+        openDefaultPorts = true;
+        user = "lmnk";
+        dataDir = "/home/lmnk/sync"; # Default folder for new synced folders
+        configDir = "/home/lmnk/.config/syncthing"; # Folder for Syncthing's settings and keys
     };
 
     # NOTE: system.stateVersion is set in hosts/msi/default.nix (it's per-host).

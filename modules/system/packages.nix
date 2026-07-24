@@ -18,6 +18,7 @@
         git
         wget
         just # utils
+        croc # p2p file transfer
     ];
 
     programs.localsend = {
