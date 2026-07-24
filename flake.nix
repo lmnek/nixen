@@ -14,18 +14,24 @@
         };
 
         noctalia = {
-            url = "github:noctalia-dev/noctalia-shell";
-            inputs.nixpkgs.follows = "nixpkgs";
+            url = "github:noctalia-dev/noctalia";
         };
 
         zen-browser = {
-            url = "github:youwen5/zen-browser-flake";
+            url = "github:0xc000022070/zen-browser-flake";
             inputs.nixpkgs.follows = "nixpkgs";
         };
 
-        sone.url = "github:lullabyX/sone"; # native TIDAL client
+        firefox-addons = { # rycee NUR — declarative, version-pinned extensions
+            url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+
+        # sone.url = "github:lullabyX/sone"; # native TIDAL client # WARNING: crashes now
 
         llm-agents.url = "github:numtide/llm-agents.nix";
+
+        voxtype.url = "github:peteonrails/voxtype";
 
         nix-index-database = {
             url = "github:nix-community/nix-index-database";
