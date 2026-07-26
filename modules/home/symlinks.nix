@@ -3,6 +3,10 @@
 { config, lib, ... }:
 
 {
+    home.file.".local/bin".source =
+        config.lib.file.mkOutOfStoreSymlink
+        "${config.home.homeDirectory}/repos/dotfiles/tilde/.local/bin";
+
     xdg.configFile =
         let
             dotfiles = "${config.home.homeDirectory}/repos/dotfiles/tilde/.config";
