@@ -27,6 +27,7 @@
             "fastfetch"
             "nsxiv" # key-handler script + config
             "zathura"
+            "xdg-desktop-portal-termfilechooser"
         ]
         (path: {
             source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";
