@@ -53,16 +53,19 @@ inputs,
                 mpv
                 obs-studio
                 vesktop # discord
+                vscodium
+                pinta
                 # todoist # -> need appimage?
                 # gwenview
 
                 # CLI tools
-                yazi
-                lazygit
-                delta
+                yazi ouch
+                lazygit delta
                 lazydocker
                 starship
                 manix # fast offline search of nixpkgs/NixOS option docs
+                ani-cli # anime streaming (needs mpv, above)
+                (llm.withPlugins { llm-openrouter = true; }) # simonw's LLM cli
                 libqalculate # qalc
 
                 # utils
@@ -85,20 +88,34 @@ inputs,
                 nodejs # node, npm, npx
                 yarn
                 python3 uv
+                svelte-language-server
                 dbeaver-bin
             ])
             ++ (
                 # Packages that come from flake inputs
                 let
                     sys = pkgs.stdenv.hostPlatform.system;
+
+                    # ponytail: hard cap, not a fix — claude-code leaks off-heap
+                    # memory while idle and can reach 20+ GB in minutes
+                    # (anthropics/claude-code#67433), which OOMs the whole
+                    # desktop. The cgroup kills the runaway session alone;
+                    # transcripts survive on disk, so `claude --resume` recovers.
+                    # Drop this wrapper once upstream fixes the leak.
+                    claude-capped = pkgs.writeShellScriptBin "claude" ''
+                        exec ${pkgs.systemd}/bin/systemd-run --user --scope --quiet --collect \
+                            -p MemoryMax=8G -p MemorySwapMax=2G \
+                            ${inputs.llm-agents.packages.${sys}.claude-code}/bin/claude "$@"
+                    '';
                 in
                     [
                     inputs.noctalia.packages.${sys}.default # desktop shell
                     # inputs.sone.packages.${sys}.default # native TIDAL client
 
                     # llm tools
-                    inputs.llm-agents.packages.${sys}.claude-code
+                    claude-capped
                     inputs.llm-agents.packages.${sys}.codex
+                    inputs.llm-agents.packages.${sys}.herdr # agent-aware multiplexer
                 ]
             );
     };

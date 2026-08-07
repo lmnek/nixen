@@ -41,8 +41,16 @@ inputs,
         extraPackages = with pkgs; [ intel-media-driver ];
     };
 
-    # memory: zram (ideal with 32 GB RAM, no disk swap)
+    # memory: zram, sized down because disko also provisions a 36G hibernate
+    # swapfile. zram pages live in RAM, so a 50% device (15G) turns memory
+    # pressure into a feedback loop instead of relieving it.
     zramSwap.enable = true;
+    zramSwap.memoryPercent = 25;
+
+    # PSI-based killer for the user slice; without this the kernel OOM killer
+    # only fires once swap is fully exhausted, which on a 36G btrfs swapfile
+    # means minutes of unusable desktop first.
+    systemd.oomd.enableUserSlices = true;
 
     time.timeZone = "Europe/Prague";
     i18n.defaultLocale = "en_US.UTF-8";

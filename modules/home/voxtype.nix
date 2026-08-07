@@ -40,6 +40,9 @@ in
             engine = "soniox";
             soniox.language_hints = [ "cs" "en" ];
 
+            # default caps a session at 60s; streaming soniox can go much longer
+            audio.max_duration_secs = 900;
+
             # soniox streaming only works in toggle mode (PTT gets
             # auto-promoted anyway; this silences the warning)
             hotkey.mode = "toggle";

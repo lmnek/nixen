@@ -19,6 +19,7 @@
             "yazi"
             "nvim"
             "zellij"
+            "herdr"
             "lazygit"
             "niri"
             "noctalia"
