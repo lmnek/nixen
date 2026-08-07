@@ -25,6 +25,8 @@
             "noctalia"
             "claude"
             "fastfetch"
+            "nsxiv" # key-handler script + config
+            "zathura"
         ]
         (path: {
             source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/${path}";

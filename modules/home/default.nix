@@ -12,6 +12,7 @@ inputs,
         ./symlinks.nix
         ./slack.nix
         ./voxtype.nix
+        ./mime.nix
         inputs.nix-index-database.homeModules.default
     ];
 
@@ -30,6 +31,9 @@ inputs,
             PAGER = "less";
             LESS = "-R"; # keep colors when paging
             # EDITOR already set by neovim option
+            VISUAL = "nvim";
+            # binary name, not package name -- xdg-open execs $BROWSER directly
+            BROWSER = "zen-beta";
         };
 
         packages =
@@ -55,8 +59,14 @@ inputs,
                 vesktop # discord
                 vscodium
                 pinta
+                kdePackages.gwenview
                 # todoist # -> need appimage?
-                # gwenview
+
+                # PDF (yazi's display_pdf chain)
+                zathura
+                kdePackages.okular
+                xournalpp
+                pdfarranger pdfmixtool
 
                 # CLI tools
                 yazi ouch
@@ -65,6 +75,7 @@ inputs,
                 starship
                 manix # fast offline search of nixpkgs/NixOS option docs
                 ani-cli # anime streaming (needs mpv, above)
+                visidata # vd
                 (llm.withPlugins { llm-openrouter = true; }) # simonw's LLM cli
                 libqalculate # qalc
 
@@ -76,6 +87,12 @@ inputs,
                 fzf
                 unzip
                 zip
+                file # mime detection; was only in yazi's wrapper before
+                glib # gio -- xdg-open's fallback when no default is set
+                dust duf # du / df
+                procs # ps
+                xh # http client
+                doggo # DNS
 
                 # depencies
                 grc # fisher plugins call it
