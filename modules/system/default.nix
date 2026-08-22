@@ -12,6 +12,7 @@ inputs,
 
 {
     imports = [
+        ./audio.nix
         ./desktop.nix
         ./dev.nix
         ./gaming.nix
@@ -71,13 +72,8 @@ inputs,
         font = "Lat2-Terminus16"; # for nicer tty
     };
 
-    # ---------- Audio (PipeWire) ----------
-    security.rtkit.enable = true;
-    services.pipewire = {
-        enable = true;
-        alsa.enable = true;
-        pulse.enable = true;
-    };
+    # ---------- Audio ----------
+    # -> ./audio.nix
 
     # ---------- User ----------
     users.users.lmnk = {

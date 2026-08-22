@@ -57,6 +57,7 @@ inputs,
                 mpv
                 obs-studio
                 vesktop # discord
+                bitwig-studio # DAW (unfree; X11 app -> xwayland-satellite)
                 vscodium
                 pinta
                 kdePackages.gwenview

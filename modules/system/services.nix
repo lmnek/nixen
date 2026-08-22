@@ -1,7 +1,6 @@
 # Standalone background daemons. Imported by modules/system/default.nix.
 #
-# Deliberately NOT here: PipeWire (audio) and greetd (login).
-# Will naturally become audio.nix / desktop.nix if split later.
+# Deliberately NOT here: PipeWire (audio.nix) and greetd (desktop.nix).
 { ... }:
 
 {
