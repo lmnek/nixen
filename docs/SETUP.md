@@ -28,6 +28,26 @@ ya pkg install
 zellij plugin -- https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm
 ```
 
+## 5. Bootstrap Zen
+
+Spaces live in `zen-sessions.jsonlz4` and keyboard shortcuts in
+`zen-keyboard-shortcuts.json`. Zen creates both on first launch, so on a fresh
+profile they do not apply until that launch has happened:
+
+```sh
+nixos-rebuild switch                          # creates the profile, no state files yet
+zen                                           # launch once to create them, then quit
+systemctl restart home-manager-lmnk.service   # Zen closed, so activation re-runs and writes them
+zen                                           # reopen: spaces and shortcuts are there
+```
+
+`restart` rather than a second `switch`, because the writer only runs when the
+generation changes and an unchanged switch is a no-op.
+
+Afterwards, close Zen before any `switch` that touches spaces, containers or
+shortcuts. The activation script needs exclusive access to those files and
+skips them with a warning while Zen is running, without failing the switch.
+
 ## 6. Email accounts
 
 Two things live outside this repo: the identity file and the passwords. The

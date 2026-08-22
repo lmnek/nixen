@@ -11,6 +11,7 @@ inputs,
         ./neovim.nix
         ./symlinks.nix
         ./slack.nix
+        ./zen.nix
         ./voxtype.nix
         ./mime.nix
         ./mail.nix
