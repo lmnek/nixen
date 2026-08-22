@@ -3,6 +3,11 @@
 { config, lib, ... }:
 
 {
+    # ~/.agents is where the `npx skills` CLI installs; ~/.claude/skills symlinks into it.
+    home.file.".agents".source =
+        config.lib.file.mkOutOfStoreSymlink
+        "${config.home.homeDirectory}/repos/dotfiles/tilde/.agents";
+
     home.file.".local/bin".source =
         config.lib.file.mkOutOfStoreSymlink
         "${config.home.homeDirectory}/repos/dotfiles/tilde/.local/bin";
