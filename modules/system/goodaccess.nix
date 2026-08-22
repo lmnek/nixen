@@ -122,4 +122,14 @@ in
     };
 
     environment.systemPackages = [ gaClient gaDesktop ];
+
+    # The GUI rewrites ~/.config/autostart/goodaccess.desktop on every launch, so
+    # own it: home-manager lays it down as a read-only store symlink the app can't
+    # overwrite, and Hidden=true keeps it from starting at login (daemon still does).
+    home-manager.users.lmnk.xdg.configFile."autostart/goodaccess.desktop".text = ''
+        [Desktop Entry]
+        Type=Application
+        Name=goodaccess
+        Hidden=true
+    '';
 }
