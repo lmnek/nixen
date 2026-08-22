@@ -101,6 +101,9 @@ in
     # resolvconf, then a raw /etc/resolv.conf write that NetworkManager reverts.
     # Without openresolv on its PATH it hit that last branch and the pushed DNS
     # silently never applied. Ranking is handled in networking.nix.
+    #
+    # The tunnel's gateway+DNS is 172.21.0.1, so docker's bridge pool is moved
+    # off 172.16/12 in virtualisation.nix -- otherwise a bridge steals it.
 
     # Vendor hardcodes /usr/share/GoodAccess and writes root-domain.save there,
     # so it must be a real writable copy, not a read-only store symlink.
