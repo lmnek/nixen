@@ -202,10 +202,17 @@ in
             };
         };
 
-        # `,` leads to the account tabs, staying clear of Alt (herdr's layer).
+        # Ctrl+number reaches the account tabs, staying clear of Alt (herdr's
+        # layer). A terminal cannot send Ctrl+1 as a control code, so this
+        # relies on the kitty keyboard protocol, which ghostty speaks and
+        # aerc's vaxis asks for. Text after ` # ` is the keyhint label.
+        #
         # :ct takes an index too, but opening a message adds a tab and shifts
-        # every later index, so bind the names. Text after ` # ` is the keyhint
-        # label.
+        # every later index, so bind the names.
+        #
+        # :read, :flag and the rest act on the marked messages whenever any
+        # are marked, so multi-select needs no bind of ours: upstream has `v`
+        # (and <Space>, which also steps down) and `V` for a visual range.
         #
         # Appending upstream's binds.conf is required. aerc installs its own
         # only when none exists (config/binds.go), so this file becomes the
@@ -215,13 +222,13 @@ in
             u = :filter -u<Enter> # Unread only (<Esc> clears)
             O = :pipe -b -m ${openHtml}/bin/aerc-open-html<Enter> # Open HTML in browser
             <C-r> = :check-mail<Enter> # Check mail now (not R: Rr/Rq reply)
-            tr = :read -t<Enter> # Toggle read
+            x = :read -t<Enter> # Toggle read
             ts = :flag -t<Enter> # Toggle flagged
             ta = :flag -t -a<Enter> # Toggle answered
-            ,1 = :ct seznam<Enter> # seznam
-            ,2 = :ct gmail<Enter> # gmail
-            ,3 = :ct gmail-alt<Enter> # gmail-alt
-            ,, = :ct -<Enter> # Back to last tab
+            <C-1> = :ct seznam<Enter> # seznam
+            <C-2> = :ct gmail<Enter> # gmail
+            <C-3> = :ct gmail-alt<Enter> # gmail-alt
+            <C-0> = :ct -<Enter> # Back to last tab
         '' + builtins.readFile "${pkgs.aerc}/share/aerc/binds.conf";
     };
 
