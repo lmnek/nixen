@@ -402,4 +402,22 @@ in {
             };
         };
     };
+
+    # Morgen, as a PWA in the WebApp profile rather than the Electron desktop
+    # app. Morgen ships Electron 37 and calls disableHardwareAcceleration(),
+    # and its own --ozone-platform=wayland fails, so the packaged app renders
+    # in software on XWayland. Zen draws the same web app GPU-accelerated.
+    #
+    # --name lands after the zen-beta wrapper's own --name=zen-beta and wins,
+    # so the window gets app_id "morgen" for niri rules. MOZ_APP_REMOTINGNAME
+    # keeps it a separate instance from the daily-driver profile.
+    # ponytail: no icon -- the only packaged one is inside the 200 MB morgen
+    # derivation, and pulling that in just for a PNG defeats the point.
+    xdg.desktopEntries.morgen = {
+        name = "Morgen";
+        genericName = "Calendar and Tasks";
+        exec = "env MOZ_APP_REMOTINGNAME=morgen zen-beta -P WebApp --name=morgen --new-window https://web.morgen.so";
+        categories = ["Office" "Calendar"];
+        startupNotify = true;
+    };
 }

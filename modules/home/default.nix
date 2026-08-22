@@ -54,17 +54,6 @@ inputs,
                 # Apps
                 obsidian
                 beeper
-                # Morgen 4.0.4 vendors Electron 37; nixpkgs' wrapper runs its
-                # app.asar on Electron 41, where the main process spins at 100%
-                # CPU and never reaches "App ready". Point the wrapper at the
-                # vendored binary (already autoPatchelf'd by the build) instead.
-                # Drop this once nixpkgs pins morgen to a matching electron.
-                (morgen.overrideAttrs {
-                    postFixup = ''
-                        rm $out/bin/morgen
-                        makeWrapper $out/opt/Morgen/morgen $out/bin/morgen
-                    '';
-                })
                 todoist-electron
                 nsxiv
                 teams-for-linux
