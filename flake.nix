@@ -37,6 +37,15 @@
             url = "github:nix-community/nix-index-database";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+
+        # Real name and email addresses, which this repo is too public to hold.
+        # Nix reads them while evaluating, so the keyring cannot supply them; a
+        # path: input keeps them on disk instead. flake.lock stores the path and
+        # a hash, never the contents. See step 6 of docs/SETUP.md.
+        private = {
+            url = "path:/home/lmnk/.config/nixen-private";
+            flake = false;
+        };
     };
 
     outputs =

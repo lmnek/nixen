@@ -13,6 +13,7 @@ inputs,
         ./slack.nix
         ./voxtype.nix
         ./mime.nix
+        ./mail.nix
         inputs.nix-index-database.homeModules.default
     ];
 

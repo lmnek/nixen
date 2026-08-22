@@ -86,6 +86,8 @@ in
             // {
                 "inode/directory" = "yazi-term.desktop";
 
+                "x-scheme-handler/mailto" = "aerc.desktop";
+
                 # were self-registered by the apps
                 "x-scheme-handler/claude-cli" = "claude-code-url-handler.desktop";
                 "x-scheme-handler/beeper" = "beepertexts.desktop";

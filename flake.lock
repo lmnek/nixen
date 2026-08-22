@@ -276,6 +276,19 @@
         "type": "github"
       }
     },
+    "private": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1787403662,
+        "narHash": "sha256-mgPMHDotr+JBN6TLS6d14GtR3Y5U/JFQS2wglW0VQOM=",
+        "path": "/home/lmnk/.config/nixen-private",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/lmnk/.config/nixen-private",
+        "type": "path"
+      }
+    },
     "root": {
       "inputs": {
         "disko": "disko",
@@ -285,6 +298,7 @@
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs_2",
         "noctalia": "noctalia",
+        "private": "private",
         "voxtype": "voxtype",
         "zen-browser": "zen-browser"
       }
