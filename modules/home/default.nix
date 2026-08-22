@@ -168,6 +168,15 @@ inputs,
     # modules/system/dev.nix). Shell integration adds its shims to PATH.
     programs.mise.enable = true;
 
+    # Dark mode. The GNOME portal exports this gsettings key as
+    # org.freedesktop.appearance color-scheme=1, which GTK4/libadwaita,
+    # Electron and Firefox/Zen read. GTK3 apps only look at their own flag.
+    dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+    gtk = {
+        enable = true;
+        gtk3.extraConfig.gtk-application-prefer-dark-theme = true;
+    };
+
     programs.zellij.enable = true;
 
     programs.alacritty = {

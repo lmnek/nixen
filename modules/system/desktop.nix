@@ -27,6 +27,10 @@
         config.niri."org.freedesktop.impl.portal.FileChooser" = "termfilechooser";
     };
 
+    # gsettings backend, so the dark-mode key in home/default.nix is visible
+    # to apps and to the portal
+    programs.dconf.enable = true;
+
     # Fonts
     fonts.packages = with pkgs; [
         nerd-fonts.jetbrains-mono
