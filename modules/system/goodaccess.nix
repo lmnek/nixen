@@ -38,6 +38,7 @@ let
         gawk
         bash
         procps
+        openresolv # client.up's only working DNS path here — see below
     ];
 
     # Unpack the .deb and fix the scripts' hardcoded PATH.
@@ -95,6 +96,11 @@ in
         lz4
         libcap_ng
     ];
+
+    # client.up picks a DNS backend by probing: systemd-resolved (off here), then
+    # resolvconf, then a raw /etc/resolv.conf write that NetworkManager reverts.
+    # Without openresolv on its PATH it hit that last branch and the pushed DNS
+    # silently never applied. Ranking is handled in networking.nix.
 
     # Vendor hardcodes /usr/share/GoodAccess and writes root-domain.save there,
     # so it must be a real writable copy, not a read-only store symlink.
