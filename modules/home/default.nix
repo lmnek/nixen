@@ -48,6 +48,7 @@ inputs,
                 ripdrag
                 wtype # text injection backend for voxtype
                 flameshot grim # screenshots
+                wl-mirror # niri has no output mirroring -- see ~/.local/bin/mirror-tv
 
                 # Apps
                 obsidian
