@@ -96,3 +96,19 @@ secret-tool store --label=gmail-alt  email gmail-alt
 Verify with `secret-tool lookup email gmail-main`, then start `aerc`. Passwords
 are read at launch, so changing one needs no rebuild: store it again and restart
 aerc.
+
+## 7. Voxtype API key
+
+Voxtype dictates through Soniox, a paid cloud STT service. Get a key at
+<https://console.soniox.com> (new accounts get free credits), then put it where
+the user service can read it — never in the repo, the nix store is
+world-readable:
+
+```sh
+install -m600 /dev/null ~/.config/voxtype/secrets.env
+echo 'SONIOX_API_KEY=your-key-here' > ~/.config/voxtype/secrets.env
+systemctl --user restart voxtype
+```
+
+The path is fixed by `modules/home/voxtype.nix`. The service fails to start
+without the file, so `systemctl --user status voxtype` is the check.
