@@ -7,7 +7,6 @@
         home-manager
 
         # desktop
-        wl-clipboard
         brightnessctl
         playerctl
         pavucontrol
@@ -17,8 +16,6 @@
         vim
         git
         wget
-        just # utils
-        croc # p2p file transfer
     ];
 
     programs.localsend = {

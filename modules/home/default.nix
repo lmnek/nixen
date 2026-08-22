@@ -54,11 +54,13 @@ inputs,
                 obsidian
                 beeper
                 morgen
+                todoist-electron
                 nsxiv
                 teams-for-linux
                 mpv
                 obs-studio
                 vesktop # discord
+                prismlauncher # minecraft (bundles its own JRE)
                 bitwig-studio # DAW (unfree; X11 app -> xwayland-satellite)
                 vscodium
                 pinta
@@ -76,11 +78,11 @@ inputs,
                 lazygit delta
                 lazydocker
                 starship
-                manix # fast offline search of nixpkgs/NixOS option docs
-                ani-cli # anime streaming (needs mpv, above)
                 visidata # vd
                 (llm.withPlugins { llm-openrouter = true; }) # simonw's LLM cli
                 libqalculate # qalc
+                manix # fast offline search of nixpkgs/NixOS option docs
+                ani-cli # anime streaming (needs mpv, above)
 
                 # utils
                 ripgrep
@@ -90,12 +92,13 @@ inputs,
                 fzf
                 unzip
                 zip
+                croc # p2p file transfer
                 file # mime detection; was only in yazi's wrapper before
-                glib # gio -- xdg-open's fallback when no default is set
                 dust duf # du / df
                 procs # ps
                 xh # http client
                 doggo # DNS
+                glib # gio -- xdg-open's fallback when no default is set
 
                 # depencies
                 grc # fisher plugins call it
@@ -105,6 +108,7 @@ inputs,
                 imagemagick # yazi previewers/openers
 
                 # dev
+                just # task runner
                 nodejs # node, npm, npx
                 yarn
                 python3 uv
@@ -135,6 +139,7 @@ inputs,
                     # llm tools
                     claude-capped
                     inputs.llm-agents.packages.${sys}.codex
+                    inputs.llm-agents.packages.${sys}.cursor-agent
                     inputs.llm-agents.packages.${sys}.herdr # agent-aware multiplexer
                 ]
             );
