@@ -23,6 +23,9 @@
             '';
         })
 
+        onlyoffice-desktopeditors
+        transmission_4-gtk
+
         vim
         git
         wget

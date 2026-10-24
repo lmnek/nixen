@@ -59,6 +59,7 @@ inputs,
                 teams-for-linux
                 mpv
                 obs-studio
+                kdePackages.kdenlive # obs recordings editing
                 vesktop # discord
                 prismlauncher # minecraft (bundles its own JRE)
                 bitwig-studio # DAW (unfree; X11 app -> xwayland-satellite)
@@ -128,7 +129,7 @@ inputs,
                     # Drop this wrapper once upstream fixes the leak.
                     claude-capped = pkgs.writeShellScriptBin "claude" ''
                         exec ${pkgs.systemd}/bin/systemd-run --user --scope --quiet --collect \
-                            -p MemoryMax=8G -p MemorySwapMax=2G \
+                            -p MemoryMax=16G -p MemorySwapMax=2G \
                             ${inputs.llm-agents.packages.${sys}.claude-code}/bin/claude "$@"
                     '';
                 in
@@ -140,7 +141,8 @@ inputs,
                     claude-capped
                     inputs.llm-agents.packages.${sys}.codex
                     inputs.llm-agents.packages.${sys}.cursor-agent
-                    inputs.llm-agents.packages.${sys}.herdr # agent-aware multiplexer
+                    inputs.llm-agents.packages.${sys}.herdr
+                    inputs.llm-agents.packages.${sys}.terminal-browser
                 ]
             );
     };
