@@ -3,13 +3,10 @@
 let
     sys = pkgs.stdenv.hostPlatform.system;
 
-    # default = symlinkJoin wrapper -> must override the unwrapped
-    # build; wrapper only adds runtime tools to PATH (wtype etc.,
-    # which we install ourselves in default.nix)
-    voxtype = inputs.voxtype.packages.${sys}.voxtype-unwrapped.overrideAttrs (old: {
-        cargoBuildFeatures = (old.cargoBuildFeatures or []) ++ [ "soniox" ];
-        cargoCheckFeatures = (old.cargoCheckFeatures or []) ++ [ "soniox" ];
-    });
+    # default = symlinkJoin wrapper that only adds runtime tools to
+    # PATH (wtype etc., which we install ourselves in default.nix).
+    # soniox needs no cargo feature: upstream compiles it always.
+    voxtype = inputs.voxtype.packages.${sys}.voxtype-unwrapped;
 
     # Preconfigured upstream OSD look; swap the filename to experiment:
     # - showcase-orbit        frameless circular badge, breathing rings
